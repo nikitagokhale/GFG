@@ -11,20 +11,24 @@ public class Solution
     {
         boolean IsBSTLeft1 = true, IsBSTRight1 = true, IsBSTLeft2 = true, IsBSTRight2 = true, IsLeftBST = true, IsRightBST = true;
         
-        if(root.left==null && root.right==null)
+        if(root.left==null && root.right==null && root.data>=min && root.data<=max)
             return true;
+        if(root.left==null && root.right==null && (root.data<=min || root.data>=max))
+            return false;
         
         if(root.left != null){
-            IsBSTLeft2 = root.data<max?true:false;
-            max = root.data;
-            IsLeftBST = IsBST(root.left, min, max);
+            int max1 = max;
+            IsBSTLeft2 = root.data<=max?true:false;
+            max1 = root.data;
+            IsLeftBST = IsBST(root.left, min, max1);
             IsBSTLeft1 = root.left.data <= root.data ? true:false;
         }
         
         if(root.right != null){
-            IsBSTRight2 = root.data>min?true:false;
-            min = root.data;
-            IsRightBST = IsBST(root.right, min, max);
+            int min1 = min;
+            IsBSTRight2 = root.data>=min?true:false;
+            min1 = root.data;
+            IsRightBST = IsBST(root.right, min1, max);
             IsBSTRight1 = root.right.data >= root.data ? true:false;
         }
         
